@@ -18,7 +18,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path, include
 from django.contrib import admin
-# from setuptools.config._validate_pyproject.formats import url
 
 
 urlpatterns = [
