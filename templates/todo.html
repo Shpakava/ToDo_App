@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="columns has-background-dark-ter is-centered has-text-white-bis" style="min-height:101vh;">
+		<div class="column is-half">
+    	<h2 class="is-size-2 has-text-centered">ToDo List</h2>
+    	<form action="" method="post">
+        	{% csrf_token %}
+
+            <div class="field has-text-centered">
+            	<label for="description" class="label has-text-white-bis">Add new task</label>
+            	<div class="control">
+             	   <input type="text" id="description" class="input" placeholder="What are your plans?"
+                    	name="description" required>
+            	</div>
+        	<div class="columns">
+            	<div class="column">
+                	<label for="category">Categories</label>
+                	<div class="control">
+                    	<div class="select">
+                        	<select id="category" class="select" name="category_select" required>
+
+                            	<option class="disabled" value="">Select a category</option>
+                    	        {% for category in categories %}
+ 	                           <option class="" value="{{ category.name }}" name="{{ category.name }}">
+                                    {{ category.name }}</option>
+                            	{% endfor %}
+                        	</select>
+    	                </div>
+                	</div>
+            	</div>
+            	<div class="column">
+                	<label for="dueDate">Select date</label>
+                	<input type="date" id="dueDate" class="input calendar" name="date" required>
+            	</div>
+        	</div>
+        	<div class="column">
+            	<div class="field">
+                	<button class="btn btn-secondary" name="Add" type="submit">
+                    	<span class="icon is-small">
+                        	<i class="fa fa-plus"></i>
+                    	</span>
+                    	<span>Add task</span>
+                	</button>
+             	   <button class="button is-link btn btn-secondary" name="Delete" formnovalidate="" type="submit">
+                    	<span class="icon is-small">
+                        	<i class="fa fa-trash-o"></i>
+                    	</span>
+                    	<span>
+                        	Delete task
+                    	</span>
+                	</button>
+            	</div>
+        	</div>
+        	<div class="list is-hoverable">
+            	{% for todo in todos %}
+
+            	<div class="list-item">
+                	<label class="checkbox">
+                    	<input type="checkbox" class=" checkbox" name="checkedbox" value="{{ todo.id }}">
+                    	<span class="complete-">{{ todo.title }}</span>
+                	</label>
+                	<span class=" category-{{ todo.category }} has-text-info">{{ todo.category }}</span>
+                	<strong class="is-pulled-right"><i class="fa fa-calendar"></i>{{ todo.created }} -
+                    	{{ todo.due_date }}</strong>
+            	</div>
+            	{% endfor %}
+        	</div>
+			</div>
+    	</form>
+	</div>
+</div>
+{% endblock %}

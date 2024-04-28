@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="columns has-background-link has-text-white is-centered" style="min-height: 101vh;">
+	<div class="column is-half">
+    	<h2 class="is-size-2 has-text-centered">Edit your categories </h2>
+    	<form action="" method="post">
+        	{% csrf_token %}
+
+            <div class="field has-text-centered">
+            	<label for="description" class="label has-text-white-bis">Add category</label>
+            	<div class="control">
+     	           <input type="text" id="description" class="input" placeholder="What are your plans?"
+                    	name="name" required>
+            	</div>
+            	<div class="field">
+					<button class="btn btn-secondary" name="Add" type="submit">
+                    	<span class="icon is-small">
+                        	<i class="fa fa-plus"></i>
+                    	</span>
+                    	<span>Add category</span>
+                	</button>
+                	<button class="btn btn-secondary" name="Delete" formnovalidate="" type="submit">
+                    	<span class="icon is-small">
+           	             <i class="fa fa-trash-o"></i>
+                    	</span>
+	                    <span>Delete category </span>
+                	</button>
+            	</div>
+            </div>
+
+
+            <div class="list is-hoverable">
+            	{% for category in categories %}
+            	<div class="list-item">
+                	<label class="checkbox">
+                    	<input type="checkbox" class="checkbox" name="check" value="{{category.id}}">
+                    	<span class="complete-">{{ category.name }}</span>
+                	</label>
+            	</div>
+            	{% endfor %}
+
+        	</div>
+    	</form>
+	</div>
+</div>
+{% endblock %}
